@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "three": "^0.143.0",
+    "three.interaction": "^0.2.3",
     "three.interactive": "^1.4.0",
     "tween": "^0.9.0"
   }

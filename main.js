@@ -2,6 +2,7 @@
 // Imports START
 import * as THREE from 'three';
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min';
+
 //import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 // Imports END
 
@@ -74,7 +75,30 @@ function updateCameraTweens(params) {
     }
 }
 
-//fading objects in
+//sphere onto screen
+
+const sphere_geo = new THREE.SphereGeometry(0.5);
+const sphere_mat = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+const sphere = new THREE.Mesh(sphere_geo, sphere_mat);
+
+
+
+scene.add(sphere)
+
+sphere.position.set(-4, 0, -40)
+
+//Next Task!!!
+
+//const raycaster = new THREE.Raycaster();
+//const pointer = new THREE.Vector2();
+
+//function onMouseMove(event) {
+
+  //  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+//    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+
+//}
 
 
 
@@ -89,6 +113,8 @@ scene.add(gridHelper);
 scene.add(ambientLight);
 
 scene.add(pointLight);
+
+
 
 
 //resizing renderer on screen resize
@@ -186,10 +212,14 @@ function animate() {
 
     TWEEN.update();
 
+    //raycaster.setFromCamera(mouse, camera);
+   
 
    // controls.update();
 
     renderer.render(scene, camera);
+
+
 
 
 }
