@@ -20,7 +20,7 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.set(0,2,5);
+camera.position.set(-20,10,10);
 
 renderer.render(scene, camera);
 
@@ -37,10 +37,10 @@ var rotationTween = new TWEEN.Tween(camera.rotation).easing(TWEEN.Easing.Quadrat
 var buttonCameraSettings = {
     button1: {
         position: {
-            x: 0,
-            y: 0,
+            x: 10,
+            y: 20,
             // negative z for into the screen
-            z: -30,
+            z: 50,
         },
         rotation: {
             x: 0,
@@ -74,33 +74,6 @@ function updateCameraTweens(params) {
         rotationTween.to(params.rotation, 1000).start();
     }
 }
-
-//sphere onto screen
-
-const sphere_geo = new THREE.SphereGeometry(0.5);
-const sphere_mat = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-const sphere = new THREE.Mesh(sphere_geo, sphere_mat);
-
-
-
-scene.add(sphere)
-
-sphere.position.set(-4, 0, -40)
-
-//Next Task!!!
-
-//const raycaster = new THREE.Raycaster();
-//const pointer = new THREE.Vector2();
-
-//function onMouseMove(event) {
-
-  //  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-//    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-
-//}
-
-
 
 
 
@@ -143,7 +116,7 @@ window.addEventListener("resize", resize_renderer);
 
 // Background image set START
 
-const background = new THREE.TextureLoader().load('./pexels-mudassir-ali-2680270.jpg')
+const background = new THREE.TextureLoader().load('./paul-volkmer-qVotvbsuM_c-unsplash.jpg')
 
 scene.background = background;
 
@@ -151,19 +124,39 @@ scene.background = background;
 
 // Objects START
 
-const geo_square = new THREE.BoxGeometry(10, 10, 10);
-const mat_square = new THREE.MeshBasicMaterial({
+const geo_planet_main = new THREE.SphereGeometry(10);
+const mat_planet_main = new THREE.MeshBasicMaterial({
     color: 0x00ff00,
+    wireframe: true
     
 });
-const square = new THREE.Mesh(geo_square, mat_square);
+const planet_main = new THREE.Mesh(geo_planet_main, mat_planet_main);
+
+
+
+const sphere_geo = new THREE.SphereGeometry(2);
+const sphere_mat = new THREE.MeshBasicMaterial({
+    color: 0xff0000,
+    wireframe: true});
+const moon_main = new THREE.Mesh(sphere_geo, sphere_mat);
+
+
+
+planet_main.add(moon_main)
+
+moon_main.position.set(-4, 0, -40)
 
 
 
 
-scene.add(square);
 
-square.position.set(0, 0, -25)
+
+
+
+
+scene.add(planet_main);
+
+planet_main.position.set(0, 0, -25)
 
 
 
@@ -190,16 +183,20 @@ function moveCamera(ev) {
 
  //   camera.position.  t * -0.01;
 
-  
+
  //   camera.position.x = 10 - window.scrollY / 1000.0;
-    camera.position.z = 10 - window.scrollY / 500.0;
+
+
+    
+    camera.position.y = 10 - window.scrollY / 5000.0;
+    camera.position.z = 10 - window.scrollY / 250.0;
+
+    camera.rotation.y = 0 - window.scrollY / 5000.0;
 }
 
 
 
 window.addEventListener("scroll", moveCamera);
-
-
 
 
 
@@ -212,8 +209,18 @@ function animate() {
 
     TWEEN.update();
 
-    //raycaster.setFromCamera(mouse, camera);
-   
+
+    planet_main.rotation.x += 0.005;
+    planet_main.rotation.y += 0.005;
+    planet_main.rotation.z += 0.001;
+
+    moon_main.rotation.x += 0.05;
+    moon_main.rotation.y += 0.05;
+    moon_main.rotation.z += 0.01;
+
+    
+
+    
 
    // controls.update();
 
@@ -223,6 +230,7 @@ function animate() {
 
 
 }
+
 
 animate();
 

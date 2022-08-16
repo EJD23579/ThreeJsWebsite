@@ -1,4 +1,6 @@
-﻿
+﻿/*Globals START*/
+
+
 canvas {
     position: fixed;
     top: 0;
@@ -18,12 +20,38 @@ body {
     width: 100%;
     margin: 0px auto;
     padding: 120px 0px;
-    min-height: 100000px;
+    min-height: 15000px;
     
 }
 
 
+/*Globals END*/
 
+
+/*Header START*/
+header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height:32px;
+    min-width: 100%;
+    background-color:red;
+
+}
+a {
+    
+    text-decoration: none;
+}
+
+
+/*Header END*/
+
+/*Footer START*/
+
+
+
+/*Footer END*/
 
 
 
